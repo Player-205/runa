@@ -29,11 +29,6 @@ buildCuda Nothing binary args entryPoint = defaultBuild binary (cuda:args) entry
 buildCuda (Just cudaPath) binary args entryPoint = run [makePathToCuda (T.unpack cudaPath), futhark, cuda, "-o", binary, unwords args, entryPoint]
 
 
-libraryPath   = "LIBRARY_PATH=/usr/local/cuda-11.4/lib64"
-ldLibraryPath = "LD_LIBRARY_PATH=/usr/local/cuda-11.4/lib64/"
-cpath         = "CPATH=/usr/local/cuda-11.4/include"
-
-
 makePathToCuda cuda = fold 
   [ "LIBRARY_PATH=", cuda, "/lib64 "
   , "LD_LIBRARY_PATH=",cuda, "/lib64/ "
